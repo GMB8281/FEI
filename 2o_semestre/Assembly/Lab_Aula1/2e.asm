@@ -1,0 +1,4 @@
+ORG 0000H
+;2e)
+MOV R2,R1
+ADD R2,#31

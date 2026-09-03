@@ -1,0 +1,4 @@
+ORG 0000H
+;2d)
+MOV A,R1
+SUBB A,#1

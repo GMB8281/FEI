@@ -1,0 +1,9 @@
+CLR C
+MOV A, R2
+MOV R4, A
+MOV A, R3
+ADDC A, R1
+MOV R5, A
+MOV A, #0
+ADDC A, #0
+MOV R6, A

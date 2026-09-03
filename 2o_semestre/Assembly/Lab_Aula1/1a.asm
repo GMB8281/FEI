@@ -1,0 +1,6 @@
+ORG 0000H
+MOV R0,#10H; 1a) movendo valor, com #
+;se fosse em decimal...
+;MOV R0,#16
+;binário....
+;MOV R0,#000010000B

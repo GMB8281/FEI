@@ -1,0 +1,52 @@
+;Seleciona o BANCO 0
+;CLR  PSW.4   ; RS1 = 0
+;CLR  PSW.3   ; RS0 = 0
+
+;Seleciona o BANCO 1
+;CLR  PSW.4   ; RS1 = 0
+;SETB PSW.3   ; RS0 = 1
+
+;Seleciona o BANCO 2
+;SETB PSW.4   ; RS1 = 1
+;CLR  PSW.3   ; RS0 = 0
+
+;Seleciona o BANCO 3
+;SETB PSW.4   ; RS1 = 1
+;SETB PSW.3   ; RS0 = 1
+
+;Colocando a matricula na memoria
+;74126002-0
+ORG 0000H
+MOV 30H,#7H
+MOV 31H,#4H
+MOV 32H,#1H
+MOV 33H,#2H
+MOV 34H,#6H
+MOV 35H,#0H
+MOV 36H,#0H
+MOV 37H,#2H
+MOV 38H,#0H
+
+;Somando
+CLR A
+CLR  PSW.4
+SETB PSW.3
+ADD A,30H
+ADD A,31H
+ADD A,32H
+ADD A,33H
+ADD A,34H
+ADD A,35H
+ADD A,36H
+ADD A,37H
+ADD A,38H
+MOV R0,A
+
+;Media
+SETB PSW.4
+CLR  PSW.3
+MOV B,#9H
+DIV AB
+MOV R0,A
+
+END

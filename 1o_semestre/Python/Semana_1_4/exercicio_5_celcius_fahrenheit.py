@@ -1,0 +1,8 @@
+F=float(input("Graus Fahrenheit: "))
+print("Temperatura em Fahrenheit: %.2f" %F)
+temperatura=float((F-32)*(5/9))
+print("Temperatura em Celcius: %.2f" %temperatura)
+C=float(input("Graus Celcius: "))
+print("Temperatura em Celcius: %.2f" %C)
+temperatura=float((9/5)*C+32)
+print("Temperatura em Fahrenheit: %.2f" %temperatura)
