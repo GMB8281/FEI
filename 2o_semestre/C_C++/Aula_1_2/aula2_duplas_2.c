@@ -9,6 +9,7 @@ int main() {
     
     int acumulador;
     
+    // ordenação bugada, arrumar depois
     for (int i=0; i<2; i++){
         if (numeros[i]>=numeros[i+1]){
             acumulador=numeros[i+1];
