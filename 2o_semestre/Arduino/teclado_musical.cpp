@@ -53,6 +53,23 @@ void sol_run() {
   }
 }
 
+void zera_vetor(){
+  if (music[0]!=0 
+      && music[1]!=0 
+      && music[2]!=0 
+      && music[3]!=0
+      && music[4]!=0
+      && music[5]!=0
+      && music[6]!=0
+      && music[7]!=0
+      && music[8]!=0
+      && music[9]!=0
+      && music[10]!=0
+      && music[11]!=0
+      && music[12]!=0){
+    
+}
+
 void loop() {
   do_run();
   re_run();
