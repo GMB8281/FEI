@@ -1,14 +1,10 @@
 #include <stdio.h>
 
 int bin[32];
-int decimal_vet[14];
 
 int clr() {
     for (int i = 31; i >= 0; i--) {
         bin[i] = 0;
-    }
-    for (int i = 13; i >= 0; i--) {
-        decimal_vet[i] = 0;
     }
     return 0;
 }
