@@ -1,5 +1,7 @@
 # Conversor IEEE 754 (32 bits)
 
+Feito por Gabriel Marinov e Daniel Torres
+
 Funções:
 
 *   `ler_numero`: Responsável por interagir com o usuário, ler a entrada via teclado e validar se é um número válido.
