@@ -1,79 +1,66 @@
 #include <stdio.h>
 
-int bin[32];
-
-int clr() {
-    for (int i = 31; i >= 0; i--) {
-        bin[i] = 0;
+float ler_numero(int *valido) {
+    float numero;
+    printf("Digite o numero: ");
+    if (scanf("%f", &numero) != 1) {
+        *valido = 0;
+    } else {
+        *valido = 1;
     }
-    return 0;
+    return numero;
 }
 
-int sinal(float w) {
-    if (w > 0) {
-        bin[0] = 0;
-    }
-    if (w < 0) {
-        bin[0] = 1;
-    }
-    return 0;
+unsigned int converter_para_bits(float numero) {
+    return *(unsigned int *)&numero;
 }
 
-int ObterExpoenteN(float num) {
-    // Retorna o n do 2^n para o Passo 3
-    if (num == 0.0) return 0;
-    if (num < 0) num = -num;
-    
-    int n = 0;
-    
-    while (num >= 2.0) {
-        num /= 2.0;
-        n++;
-    }
-    
-    while (num < 1.0) {
-        num *= 2.0;
-        n--;
-    }
-    
-    return n;
+int obter_sinal(unsigned int bits) {
+    return (bits >> 31) & 1;
 }
 
-int DecParaBin(float num) {
-    if (num == 0.0) return 0;
-    if (num < 0) num = -num;
+long long obter_bias_binario(unsigned int bits) {
+    int bias_decimal = (bits >> 23) & 0xFF;
+    long long numero_binario_bias = 0;
+    long long posicao_bias = 1;
+    int temp_bias = bias_decimal;
     
-    while (num >= 2.0) {
-        num /= 2.0;
+    while (temp_bias > 0) {
+        int resto = temp_bias % 2;
+        numero_binario_bias += (resto * posicao_bias);
+        temp_bias /= 2;
+        posicao_bias *= 10;
     }
     
-    while (num < 1.0) {
-        num *= 2.0;
-    }
+    return numero_binario_bias;
+}
+
+void imprimir_ieee754(int bit_sinal, long long numero_binario_bias, unsigned int bits) {
+    printf("REPRESENTACAO FINAL IEEE 754 (32 BITS):\n");
+    printf("Sinal | Bias     | Mantissa\n");
+    printf("%d     | %08lld | ", bit_sinal, numero_binario_bias);
     
-    float parte_fracionaria = num - 1.0;
-    for (int i = 1; i <= 23; i++) {
-        parte_fracionaria *= 2.0;
-        if (parte_fracionaria >= 1.0) {
-            bin[i] = 1;
-            parte_fracionaria -= 1.0;
-        } else {
-            bin[i] = 0;
-        }
+    for (int j = 22; j >= 0; j--) {
+        int bit_mantissa = (bits >> j) & 1;
+        printf("%d", bit_mantissa);
     }
-    
-    return 0;
+    printf("\n");
 }
 
 int main() {
-    float decimal;
+    int entrada_valida;
     
-    clr();
-    scanf("%f", &decimal);
-    sinal(decimal);
+    float numero = ler_numero(&entrada_valida);
+    if (!entrada_valida) {
+        printf("Entrada invalida.\n");
+        return 1;
+    }
     
-    DecParaBin(decimal);
-    int n = ObterExpoenteN(decimal);
+    unsigned int bits = converter_para_bits(numero);
+    int bit_sinal = obter_sinal(bits);
+    long long numero_binario_bias = obter_bias_binario(bits);
+    
+    imprimir_ieee754(bit_sinal, numero_binario_bias, bits);
     
     return 0;
 }
