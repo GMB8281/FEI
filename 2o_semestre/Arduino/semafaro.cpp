@@ -46,11 +46,14 @@ void loop() {
       digitalWrite(ledPedVerde, HIGH);
       delay(tempoTravessia);
 
-      // 4. LED verde do pedestre pisca antes de fechar
-      for (int i = 0; i < 5; i++) {
-        digitalWrite(ledPedVerde, LOW);
+      // 4. LED vermelho do pedestre pisca antes de fechar
+      digitalWrite(ledPedVermelho, HIGH);
+      digitalWrite(ledPedVerde, LOW);
+      delay(400);
+      for (int i = 1; i < 5; i++) {
+        digitalWrite(ledPedVermelho, LOW);
         delay(400);
-        digitalWrite(ledPedVerde, HIGH);
+        digitalWrite(ledPedVermelho, HIGH);
         delay(400);
       }
 
